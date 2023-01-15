@@ -94,6 +94,46 @@ let pwdLength = parseInt (
   prompt("How long password you want to have?")
 )
 alert(pwdLength);
+if(isNaN(pwdLength) === true){
+  alert('You must enter numeric value between 10 and 64')
+  return;
+}
+if(pwdLength < 10){
+  alert('Password lenght must be at least 10 characters')
+  return;
+}
+if(pwdLength > 64){
+  alert('Password lenght must be maximum of 64 characters')
+  return;
+}
+let includeSpecialCharacters = confirm(
+  'Click Ok to include special characters, press cancel to not include them'
+)
+let includeNumericCharacters = confirm(
+  'Click Ok to include numbers, press cancel to not include them'
+)
+let includeLowerCasedCharacters = confirm(
+  'Click Ok to include lower cased characters, press cancel to not include them'
+)
+let includeUpperCasedCharacters = confirm(
+  'Click Ok to include upper cased characters, press cancel to not include them'
+)
+if (includeSpecialCharacters === false &&
+  includeNumericCharacters === false &&
+  includeLowerCasedCharacters === false &&
+  includeUpperCasedCharacters === false) {
+    alert('Password can not be generated without any character types selected, please select at least one type of characters')
+    return;
+  }
+let passwordOptions = {
+  pwdLength: pwdLength,
+  includeSpecialCharacters: includeSpecialCharacters,
+  includeNumericCharacters: includeNumericCharacters,
+  includeLowerCasedCharacters: includeLowerCasedCharacters,
+  includeUpperCasedCharacters: includeUpperCasedCharacters
+}
+
+return passwordOptions;
 }
 
 // Function for getting a random element from an array
@@ -106,6 +146,31 @@ return randomElement
 // Function to generate password with user input
 function generatePassword() {
 let options = getPasswordOptions();
+console.log(options)
+let pwdGenerationResult = []
+
+let possibleCharacters = []
+
+let guaranteedCharacters = []
+
+if(options.includeSpecialCharacters) {
+  possibleCharacters = possibleCharacters.concat(specialCharacters)
+  guaranteedCharacters.push(getRandom(specialCharacters))
+} 
+if(options.includeNumericCharacters) {
+  possibleCharacters = possibleCharacters.concat(lowerCasedCharacters)
+  guaranteedCharacters.push(getRandom(lowerCasedCharacters))
+} 
+console.log(guaranteedCharacters)
+console.log(possibleCharacters)
+
+
+
+
+
+
+
+
 }
 
 // Get references to the #generate element
