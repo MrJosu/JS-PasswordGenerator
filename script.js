@@ -9,38 +9,38 @@ var upperCasedCharacters = ['A','B','C','D','E','F','G','H','I','J','K','L','M',
 // Function to prompt user for password options
 function getPasswordOptions(){
 let pwdLength = parseInt (
-  prompt("How long password you want to have?")
+  prompt("How long password you want to be generated? Please enter numeric value between 10 and 64")
 )
 alert(pwdLength);
 if(isNaN(pwdLength) === true){
-  alert('You must enter numeric value between 10 and 64')
+  alert('Note: You must enter numeric value between 10 and 64')
   return;
 }
 if(pwdLength < 10){
-  alert('Password lenght must be at least 10 characters')
+  alert('Note: Password lenght must be at least 10 characters')
   return;
 }
 if(pwdLength > 64){
-  alert('Password lenght must be maximum of 64 characters')
+  alert('Note: Password lenght must be maximum of 64 characters')
   return;
 }
 let includeSpecialCharacters = confirm(
-  'Click Ok to include special characters, press cancel to not include them'
+  'Click Ok to include special characters, press Cancel to not include them'
 )
 let includeNumericCharacters = confirm(
-  'Click Ok to include numbers, press cancel to not include them'
+  'Click Ok to include numbers, press Cancel to not include them'
 )
 let includeLowerCasedCharacters = confirm(
-  'Click Ok to include lower cased characters, press cancel to not include them'
+  'Click Ok to include lower cased characters, press Cancel to not include them'
 )
 let includeUpperCasedCharacters = confirm(
-  'Click Ok to include upper cased characters, press cancel to not include them'
+  'Click Ok to include upper cased characters, press Cancel to not include them'
 )
 if (includeSpecialCharacters === false &&
   includeNumericCharacters === false &&
   includeLowerCasedCharacters === false &&
   includeUpperCasedCharacters === false) {
-    alert('Password can not be generated without any character types selected, please select at least one type of characters')
+    alert('Note: Password can not be generated without any character types selected, please select at least one type of characters')
     return;
   }
 let passwordOptions = {
@@ -80,24 +80,19 @@ if(options.includeUpperCasedCharacters) {
   possibleCharacters = possibleCharacters.concat(upperCasedCharacters)
   guaranteedCharacters.push(getRandom(upperCasedCharacters))
 }
-console.log(possibleCharacters)
-console.log(guaranteedCharacters)
 for(let i = 0; i < options.pwdLength; i++){
   var generated = getRandom(possibleCharacters);
   pwdGenerationResult.push(generated);
 }
 return pwdGenerationResult.join("")
 }
-// console.log(pwdGenerationResult)
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
-
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
   passwordText.value = password;
 }
-
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
